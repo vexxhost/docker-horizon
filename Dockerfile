@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: © 2025 VEXXHOST, Inc.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-FROM ghcr.io/vexxhost/openstack-venv-builder:zed AS build
+FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:f1ce3a89ce8663f549f8a33efc38121048381baee14d9d02965df088401061bf AS build
 RUN \
   --mount=type=bind,from=horizon,source=/,target=/src/horizon,readwrite \
   --mount=type=bind,from=designate-dashboard,source=/,target=/src/designate-dashboard,readwrite \
@@ -10,7 +10,8 @@ RUN \
   --mount=type=bind,from=magnum-ui,source=/,target=/src/magnum-ui,readwrite \
   --mount=type=bind,from=manila-ui,source=/,target=/src/manila-ui,readwrite \
   --mount=type=bind,from=neutron-vpnaas-dashboard,source=/,target=/src/neutron-vpnaas-dashboard,readwrite \
-  --mount=type=bind,from=octavia-dashboard,source=/,target=/src/octavia-dashboard,readwrite <<EOF bash -xe
+  --mount=type=bind,from=octavia-dashboard,source=/,target=/src/octavia-dashboard,readwrite \
+  --mount=type=bind,from=senlin-dashboard,source=/,target=/src/senlin-dashboard,readwrite <<EOF bash -xe
 uv pip install \
     --constraint /upper-constraints.txt \
         /src/designate-dashboard \
@@ -21,10 +22,11 @@ uv pip install \
         /src/manila-ui \
         /src/neutron-vpnaas-dashboard \
         /src/octavia-dashboard \
+        /src/senlin-dashboard \
         pymemcache
 EOF
 
-FROM ghcr.io/vexxhost/python-base:zed
+FROM ghcr.io/vexxhost/python-base:zed@sha256:5a4fb2e6c2b06a38efc20a850a29250c224a29d86711f0b4c66dbfbd40eb3212
 RUN \
     groupadd -g 42424 horizon && \
     useradd -u 42424 -g 42424 -M -d /var/lib/horizon -s /usr/sbin/nologin -c "Horizon User" horizon && \

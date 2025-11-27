@@ -56,6 +56,11 @@ jobs:
           repository: openstack/octavia-dashboard
           ref: c3cec4d27756601aff32d0fd560166e65a2e1547
 
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+        with:
+          repository: openstack/senlin-dashboard
+          ref: zed-eom
+
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
           image-name: horizon
@@ -69,4 +74,5 @@ jobs:
             manila-ui=openstack/manila-ui
             neutron-vpnaas-dashboard=openstack/neutron-vpnaas-dashboard
             octavia-dashboard=openstack/octavia-dashboard
+            senlin-dashboard=openstack/senlin-dashboard
           push: ${{ github.event_name != 'pull_request' }}
