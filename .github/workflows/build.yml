@@ -19,42 +19,42 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/horizon
-          ref: 54f710ff815a4f45615bd111bc7ca45f6beb562c
+          ref: 54f710ff815a4f45615bd111bc7ca45f6beb562c # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/designate-dashboard
-          ref: 5ae88cbc9c0d728ce94acc568b7c9394ad49f175
+          ref: 5ae88cbc9c0d728ce94acc568b7c9394ad49f175 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/heat-dashboard
-          ref: 2a5ad239edb99f60ff401e9f4bcdb33f809cd77c
+          ref: 2a5ad239edb99f60ff401e9f4bcdb33f809cd77c # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/ironic-ui
-          ref: abd2400a0e40fff5b50d5b3490915b4a0f3ebcbd
+          ref: abd2400a0e40fff5b50d5b3490915b4a0f3ebcbd # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/magnum-ui
-          ref: 59d8a0864ef10d75baabbde1404f2386759fb2b6
+          ref: 59d8a0864ef10d75baabbde1404f2386759fb2b6 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/manila-ui
-          ref: 40a8a1075c3bd0315c5b25b8a5caf6bdb1ef3c30
+          ref: 40a8a1075c3bd0315c5b25b8a5caf6bdb1ef3c30 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 823399e6187a8c365b1d64b9620f99fd949aadc1
+          ref: 823399e6187a8c365b1d64b9620f99fd949aadc1 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/octavia-dashboard
-          ref: 3386566c7c98a055a4e42797f6843f5a44f9e48e
+          ref: 3386566c7c98a055a4e42797f6843f5a44f9e48e # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
