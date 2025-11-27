@@ -19,42 +19,42 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/horizon
-          ref: 54f710ff815a4f45615bd111bc7ca45f6beb562c
+          ref: 5a417cf9c502f1b7d7013835df594999ea5c9515
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/designate-dashboard
-          ref: 5ae88cbc9c0d728ce94acc568b7c9394ad49f175
+          ref: 9f1e7e9855dc58aa8d3a2ef24eea758a93963b90
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/heat-dashboard
-          ref: 2a5ad239edb99f60ff401e9f4bcdb33f809cd77c
+          ref: 7ee87d7504e97e0538697ba6d7f58884994db7ac
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/ironic-ui
-          ref: abd2400a0e40fff5b50d5b3490915b4a0f3ebcbd
+          ref: 162a61171f0dd632bc422b46063f40f805c92252
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/magnum-ui
-          ref: 59d8a0864ef10d75baabbde1404f2386759fb2b6
+          ref: 8b85469c841a151d19b0f09eaf6bdc76f1d44f3b
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/manila-ui
-          ref: 40a8a1075c3bd0315c5b25b8a5caf6bdb1ef3c30
+          ref: a2563fc220962c982dba1986972f3ddf5d132175
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 823399e6187a8c365b1d64b9620f99fd949aadc1
+          ref: 9bf310507187b7e0d4be71a56e47ce1d103b7f23
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/octavia-dashboard
-          ref: 3386566c7c98a055a4e42797f6843f5a44f9e48e
+          ref: 990e7d1141ccd602101ee5cccf11a7ef24f52865
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
