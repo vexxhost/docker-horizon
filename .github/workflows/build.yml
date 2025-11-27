@@ -16,49 +16,50 @@ jobs:
       id-token: write
       packages: write
     steps:
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/horizon
-          ref: 54f710ff815a4f45615bd111bc7ca45f6beb562c
+          ref: cf39ff71ec7d9b0f030066e0dd2fa6ad327f947a
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/designate-dashboard
-          ref: 5ae88cbc9c0d728ce94acc568b7c9394ad49f175
+          ref: fde744e28936a7e4a0e9bc73137c5e67f11cd333
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/heat-dashboard
-          ref: 2a5ad239edb99f60ff401e9f4bcdb33f809cd77c
+          ref: zed-eol
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/ironic-ui
-          ref: abd2400a0e40fff5b50d5b3490915b4a0f3ebcbd
+          ref: d471c0d6c792a32092924b6e9e6fae7597d14601
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/magnum-ui
-          ref: 59d8a0864ef10d75baabbde1404f2386759fb2b6
+          ref: c4c60b779d52a713c0acb3ef4c7987aab1a42657
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/manila-ui
-          ref: 40a8a1075c3bd0315c5b25b8a5caf6bdb1ef3c30
+          ref: 961fc0168b0271cb6e6bee8f7abef732445b9fc7
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 823399e6187a8c365b1d64b9620f99fd949aadc1
+          ref: d07bc632d88ff7c8143e501ba15544c18381d08b
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@stable/zed
         with:
           repository: openstack/octavia-dashboard
-          ref: 3386566c7c98a055a4e42797f6843f5a44f9e48e
+          ref: c3cec4d27756601aff32d0fd560166e65a2e1547
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/build-image@stable/zed
         with:
           image-name: horizon
+          base-image-tag: zed
           build-contexts: |
             horizon=openstack/horizon
             designate-dashboard=openstack/designate-dashboard
