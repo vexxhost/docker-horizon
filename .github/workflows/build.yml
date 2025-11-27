@@ -64,7 +64,6 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
           image-name: horizon
-          base-image-tag: zed
           build-contexts: |
             horizon=openstack/horizon
             designate-dashboard=openstack/designate-dashboard
