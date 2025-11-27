@@ -19,42 +19,42 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/horizon
-          ref: 5a417cf9c502f1b7d7013835df594999ea5c9515
+          ref: 5a417cf9c502f1b7d7013835df594999ea5c9515 # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/designate-dashboard
-          ref: 9f1e7e9855dc58aa8d3a2ef24eea758a93963b90
+          ref: 9f1e7e9855dc58aa8d3a2ef24eea758a93963b90 # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/heat-dashboard
-          ref: 7ee87d7504e97e0538697ba6d7f58884994db7ac
+          ref: 7ee87d7504e97e0538697ba6d7f58884994db7ac # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/ironic-ui
-          ref: 162a61171f0dd632bc422b46063f40f805c92252
+          ref: 162a61171f0dd632bc422b46063f40f805c92252 # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/magnum-ui
-          ref: 8b85469c841a151d19b0f09eaf6bdc76f1d44f3b
+          ref: 8b85469c841a151d19b0f09eaf6bdc76f1d44f3b # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/manila-ui
-          ref: a2563fc220962c982dba1986972f3ddf5d132175
+          ref: a2563fc220962c982dba1986972f3ddf5d132175 # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 9bf310507187b7e0d4be71a56e47ce1d103b7f23
+          ref: 9bf310507187b7e0d4be71a56e47ce1d103b7f23 # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/octavia-dashboard
-          ref: 990e7d1141ccd602101ee5cccf11a7ef24f52865
+          ref: 990e7d1141ccd602101ee5cccf11a7ef24f52865 # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
