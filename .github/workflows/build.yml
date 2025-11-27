@@ -16,47 +16,47 @@ jobs:
       id-token: write
       packages: write
     steps:
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/horizon
-          ref: 54f710ff815a4f45615bd111bc7ca45f6beb562c
+          ref: 6d9fbae3960e319b86d3ea2ddbc1c9e20be4ada6
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/designate-dashboard
-          ref: 5ae88cbc9c0d728ce94acc568b7c9394ad49f175
+          ref: e7f1583643792b858142bcd4a7d99950646e6ffd
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/heat-dashboard
-          ref: 2a5ad239edb99f60ff401e9f4bcdb33f809cd77c
+          ref: f6dc92a972c36f9e8258a16ec0891845ef8accca
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/ironic-ui
-          ref: abd2400a0e40fff5b50d5b3490915b4a0f3ebcbd
+          ref: 40d8f907334c113cf2fe43bd2a5bbbef6baadbab
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/magnum-ui
-          ref: 59d8a0864ef10d75baabbde1404f2386759fb2b6
+          ref: c9fdb537eaded73e81ea296d893e45d753337dc7
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/manila-ui
-          ref: 40a8a1075c3bd0315c5b25b8a5caf6bdb1ef3c30
+          ref: 55945d56a479790e5443299fa4991e7728a6f89d
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 823399e6187a8c365b1d64b9620f99fd949aadc1
+          ref: 6207d9a20b2f3c53a50d767a364aa8c448a2c923
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@2024.2
         with:
           repository: openstack/octavia-dashboard
-          ref: 3386566c7c98a055a4e42797f6843f5a44f9e48e
+          ref: 1d4b034669c819217a0f58a394dae4340661bdeb
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
+      - uses: vexxhost/docker-atmosphere/.github/actions/build-image@2024.2
         with:
           image-name: horizon
           build-contexts: |
