@@ -22,8 +22,7 @@ uv pip install \
         /src/manila-ui \
         /src/neutron-vpnaas-dashboard \
         /src/octavia-dashboard \
-        /src/senlin-dashboard \
-        pymemcache
+        /src/senlin-dashboard
 EOF
 
 FROM ghcr.io/vexxhost/python-base:zed@sha256:5a4fb2e6c2b06a38efc20a850a29250c224a29d86711f0b4c66dbfbd40eb3212
