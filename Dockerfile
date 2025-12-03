@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: © 2025 VEXXHOST, Inc.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:9fff812998e2bf43ef47217f15f03a83a6c3bbd7bb1840f755118f5152e25f6a AS build
+FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:881c06dfd00ae4fe4ffd3041943d362d5705cd15bbd02508bbfb5162b180f1e1 AS build
 RUN \
   --mount=type=bind,from=horizon,source=/,target=/src/horizon,readwrite \
   --mount=type=bind,from=designate-dashboard,source=/,target=/src/designate-dashboard,readwrite \
