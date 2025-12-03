@@ -35,7 +35,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/ironic-ui
-          ref: 162a61171f0dd632bc422b46063f40f805c92252 # stable/2025.2
+          ref: c537b9562addf2f61fcbb324959460d9fb5b885d # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
@@ -55,7 +55,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/octavia-dashboard
-          ref: 990e7d1141ccd602101ee5cccf11a7ef24f52865 # stable/2025.2
+          ref: a67d1cd7b9217dfafd8456af8f62ad02ed72663e # stable/2025.2
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
