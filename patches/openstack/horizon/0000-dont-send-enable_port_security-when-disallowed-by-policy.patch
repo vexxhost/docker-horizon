@@ -1,0 +1,120 @@
+From 4aacbc95cb8a1671017425794029eaa112cdcefe Mon Sep 17 00:00:00 2001
+From: Dong Ma <dong.ma@vexxhost.com>
+Date: Tue, 21 Oct 2025 11:44:15 +0000
+Subject: [PATCH] Don't send enable_port_security when disallowed by policy
+
+When a user creates a network port, if they don't have the rights
+to change port security, they will be unable to submit the form.
+The solution is to not send any value for port security when the
+user doesn't have the rights to change it.
+
+Change-Id: I70d15b71083c3934ed48f24765b42a62daf58cf8
+Signed-off-by: Dong Ma <dong.ma@vexxhost.com>
+(cherry picked from commit 4b933df52ae64314b26c2d8028203b70091736c9)
+---
+
+diff --git a/openstack_dashboard/dashboards/admin/networks/ports/tests.py b/openstack_dashboard/dashboards/admin/networks/ports/tests.py
+index b9f33f3..d6bb6f4 100644
+--- a/openstack_dashboard/dashboards/admin/networks/ports/tests.py
++++ b/openstack_dashboard/dashboards/admin/networks/ports/tests.py
+@@ -216,7 +216,7 @@
+         self.assertRedirectsNoFollow(res, redir_url)
+ 
+         self.assert_mock_multiple_calls_with_same_arguments(
+-            self.mock_network_get, 2,
++            self.mock_network_get, 3,
+             mock.call(test.IsHttpRequest(), network.id))
+         self.mock_security_group_list.assert_called_once_with(
+             test.IsHttpRequest(), tenant_id='1')
+@@ -284,7 +284,7 @@
+         self.assertRedirectsNoFollow(res, redir_url)
+ 
+         self.assert_mock_multiple_calls_with_same_arguments(
+-            self.mock_network_get, 2,
++            self.mock_network_get, 3,
+             mock.call(test.IsHttpRequest(), network.id))
+         self._check_is_extension_supported(
+             {'mac-learning': 1,
+@@ -363,7 +363,7 @@
+         self.assertRedirectsNoFollow(res, redir_url)
+ 
+         self.assert_mock_multiple_calls_with_same_arguments(
+-            self.mock_network_get, 2,
++            self.mock_network_get, 3,
+             mock.call(test.IsHttpRequest(), network.id))
+         self._check_is_extension_supported(
+             {'mac-learning': 1,
+diff --git a/openstack_dashboard/dashboards/project/networks/ports/tests.py b/openstack_dashboard/dashboards/project/networks/ports/tests.py
+index 8b9b722..f091b9c 100644
+--- a/openstack_dashboard/dashboards/project/networks/ports/tests.py
++++ b/openstack_dashboard/dashboards/project/networks/ports/tests.py
+@@ -624,7 +624,7 @@
+         self.assertRedirectsNoFollow(res, redir_url)
+ 
+         self.assert_mock_multiple_calls_with_same_arguments(
+-            self.mock_network_get, 2,
++            self.mock_network_get, 3,
+             mock.call(test.IsHttpRequest(), network.id))
+         self._check_is_extension_supported({'binding': 1,
+                                             'mac-learning': 1,
+@@ -769,7 +769,7 @@
+         self.assertRedirectsNoFollow(res, redir_url)
+ 
+         self.assert_mock_multiple_calls_with_same_arguments(
+-            self.mock_network_get, 2,
++            self.mock_network_get, 3,
+             mock.call(test.IsHttpRequest(), network.id))
+         self._check_is_extension_supported({'binding': 1,
+                                             'mac-learning': 1,
+diff --git a/openstack_dashboard/dashboards/project/networks/ports/workflows.py b/openstack_dashboard/dashboards/project/networks/ports/workflows.py
+index 2ad7995..02afcd9 100644
+--- a/openstack_dashboard/dashboards/project/networks/ports/workflows.py
++++ b/openstack_dashboard/dashboards/project/networks/ports/workflows.py
+@@ -24,6 +24,7 @@
+ 
+ from openstack_dashboard import api
+ from openstack_dashboard.dashboards.project.networks.ports import sg_base
++from openstack_dashboard import policy
+ from openstack_dashboard.utils import filters
+ from openstack_dashboard.utils import settings as setting_utils
+ 
+@@ -248,6 +249,25 @@
+     def handle(self, request, context):
+         try:
+             params = self._construct_parameters(context)
++            network_id = context['network_id']
++            try:
++                network = api.neutron.network_get(self.request, network_id)
++            except Exception:
++                network = None
++            if (
++                not policy.check(
++                    (("network", "create_port:port_security_enabled"),),
++                    request,
++                    {
++                        'network_id': context['network_id'],
++                        'tenant_id': context['target_tenant_id'],
++                        'network:tenant_id': getattr(
++                            network, 'tenant_id', None
++                        ),
++                    }
++                ) and params.get('port_security_enabled', True)
++            ):
++                params.pop('port_security_enabled')
+             port = api.neutron.port_create(request, **params)
+             self.context['port_id'] = port.id
+             return True
+diff --git a/releasenotes/notes/donot-send-enable_port_security-when-disallowed-by-policy-aa3afc4ec7258fd4.yaml b/releasenotes/notes/donot-send-enable_port_security-when-disallowed-by-policy-aa3afc4ec7258fd4.yaml
+new file mode 100644
+index 0000000..b0db4c4
+--- /dev/null
++++ b/releasenotes/notes/donot-send-enable_port_security-when-disallowed-by-policy-aa3afc4ec7258fd4.yaml
+@@ -0,0 +1,8 @@
++---
++features:
++  - |
++    Don't send enable_port_security when disallowed by policy. When a user
++    creates a network port, if they don't have the rights to change port
++    security, they will be unable to submit the form. The solution is to not
++    send any value for port security when the user doesn't have the rights
++    to change it.
