@@ -12,29 +12,29 @@ Change-Id: Ief547b55f90ff2bfd9f97ea859b4511c631676ef
 Closes-Bug: 1788367
 Signed-off-by: Dong Ma <dong.ma@vexxhost.com>
 ---
- openstack_dashboard/api/microversions.py                       | 1 +
- openstack_dashboard/api/nova.py                                | 8 +++++---
- .../notes/nova-live-migrate-microversion-c3ccf731126b6e28.yaml | 6 ++++++
+ openstack_dashboard/api/microversions.py                        | 1 +
+ openstack_dashboard/api/nova.py                                 | 8 +++++---
+ .../notes/nova-live-migrate-microversion-c3ccf731126b6e28.yaml  | 6 ++++++
  3 files changed, 12 insertions(+), 3 deletions(-)
  create mode 100644 releasenotes/notes/nova-live-migrate-microversion-c3ccf731126b6e28.yaml
 
 diff --git a/openstack_dashboard/api/microversions.py b/openstack_dashboard/api/microversions.py
-index 556b85d..9322e33 100644
+index d31712ce8..5f2c05854 100644
 --- a/openstack_dashboard/api/microversions.py
 +++ b/openstack_dashboard/api/microversions.py
-@@ -39,6 +39,7 @@
+@@ -38,6 +38,7 @@ MICROVERSION_FEATURES = {
+         "key_types": ["2.2", "2.9"],
          "key_type_list": ["2.9"],
          "rescue_instance_volume_based": ["2.87", "2.93"],
-         "bdm2_volume_type": ["2.67", "2.96"],
 +        "live_migrate": ["2.30"],
      },
      "cinder": {
          "groups": ["3.27", "3.43", "3.48", "3.58"],
 diff --git a/openstack_dashboard/api/nova.py b/openstack_dashboard/api/nova.py
-index 532446b..26e11b4 100644
+index 33c8e0078..f90ec8812 100644
 --- a/openstack_dashboard/api/nova.py
 +++ b/openstack_dashboard/api/nova.py
-@@ -609,9 +609,11 @@
+@@ -612,9 +612,11 @@ def server_migrate(request, instance_id):
  @profiler.trace
  def server_live_migrate(request, instance_id, host, block_migration=False,
                          disk_over_commit=False):
