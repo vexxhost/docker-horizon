@@ -35,12 +35,12 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/ironic-ui
-          ref: a50a6e491c85de91bc751a621082f9dac594dac2 # stable/2024.1
+          ref: 4bf4e0a09a220ce892a7026e69fabf2f36b4d780 # stable/2024.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/magnum-ui
-          ref: e79a2177c8645ba50093896832626d5663c43931 # stable/2024.1
+          ref: d6229fe6248f290c3c0a5e3f376ef5a6127bf78d # stable/2024.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
@@ -50,12 +50,12 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: a3136f6f3597f291c97e9802b421048fe9286356 # stable/2024.1
+          ref: 779acd419686e990c6845e3249e1fbe940fb43f5 # stable/2024.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/octavia-dashboard
-          ref: 468c619bfc27b8734698571de12c06ab6ff6241a # stable/2024.1
+          ref: 141b042fd227d0e1a20699734b191ceeb84c48d3 # stable/2024.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@main
         with:
