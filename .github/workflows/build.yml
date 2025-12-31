@@ -35,12 +35,12 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/ironic-ui
-          ref: a50a6e491c85de91bc751a621082f9dac594dac2 # stable/2024.1
+          ref: 4bf4e0a09a220ce892a7026e69fabf2f36b4d780 # stable/2024.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
           repository: openstack/magnum-ui
-          ref: e79a2177c8645ba50093896832626d5663c43931 # stable/2024.1
+          ref: d6229fe6248f290c3c0a5e3f376ef5a6127bf78d # stable/2024.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
