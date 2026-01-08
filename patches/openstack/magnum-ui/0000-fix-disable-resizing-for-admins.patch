@@ -30,34 +30,34 @@ index ebc6a96..b86833a 100644
      'horizon.framework.util.i18n.gettext',
 @@ -43,8 +44,8 @@
    ];
- 
+
    function resizeService(
 -    $rootScope, $q, magnum, actionResult, gettext, $qExtensions, modal, toast, spinnerModal,
 -    resourceType
 +    $rootScope, $q, userSession, magnum, actionResult, gettext, $qExtensions,
 +    modal, toast, spinnerModal, resourceType
    ) {
- 
+
      var modalConfig, formModel;
 @@ -87,8 +88,8 @@
        return deferred.promise;
      }
- 
+
 -    function allowed() {
 -      return $qExtensions.booleanAsPromise(true);
 +    function allowed(selected) {
 +      return userSession.isCurrentProject(selected.project_id);
      }
- 
-     function constructModalConfig(workerNodesList) {
+
+     function constructModalConfig(nodegroups, workerNodesList) {
 diff --git a/magnum_ui/static/dashboard/container-infra/clusters/resize/resize.service.spec.js b/magnum_ui/static/dashboard/container-infra/clusters/resize/resize.service.spec.js
 index 842df87..645b149 100644
 --- a/magnum_ui/static/dashboard/container-infra/clusters/resize/resize.service.spec.js
 +++ b/magnum_ui/static/dashboard/container-infra/clusters/resize/resize.service.spec.js
 @@ -19,9 +19,10 @@
- 
+
    describe('horizon.dashboard.container-infra.clusters.resize.service', function() {
- 
+
 -    var service, $scope, $q, deferred, magnum, spinnerModal, modalConfig;
 +    var service, $scope, $q, deferred, magnum, spinnerModal, modalConfig, userSession;
      var selected = {
@@ -72,13 +72,13 @@ index 842df87..645b149 100644
        magnum = $injector.get('horizon.app.core.openstack-service-api.magnum');
        spinnerModal = $injector.get('horizon.framework.widgets.modal-wait-spinner.service');
 +      userSession = $injector.get('horizon.app.core.openstack-service-api.userSession');
- 
+
        spyOn(spinnerModal, 'showModalSpinner').and.callFake(function() {});
        spyOn(spinnerModal, 'hideModalSpinner').and.callFake(function() {});
 @@ -60,9 +62,22 @@
        spyOn(modal, 'open').and.callThrough();
      }));
- 
+
 -    it('should check the policy if the user is allowed to update cluster', function() {
 -      var allowed = service.allowed();
 -      expect(allowed).toBeTruthy();
@@ -99,7 +99,8 @@ index 842df87..645b149 100644
 +
 +      throw new Error('User should not be allowed to resize cluster');
      });
- 
+
      it('should open the modal, hide the loading spinner and check the form model',
--- 
+--
 2.34.1
+
