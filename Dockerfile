@@ -25,7 +25,7 @@ uv pip install \
         /src/senlin-dashboard
 EOF
 
-FROM ghcr.io/vexxhost/python-base:zed@sha256:06eb099e933ac2ec193163c3a6fa202f73a89671183a9bb7aa9cd5e4cd42aa01
+FROM ghcr.io/vexxhost/python-base:zed@sha256:a2780419bba8b00a56e91ce5b818b5673ecec9060cc92aa78f2e5fdb449b1212
 RUN \
     groupadd -g 42424 horizon && \
     useradd -u 42424 -g 42424 -M -d /var/lib/horizon -s /usr/sbin/nologin -c "Horizon User" horizon && \
