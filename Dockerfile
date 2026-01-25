@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: © 2025 VEXXHOST, Inc.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-FROM ghcr.io/vexxhost/openstack-venv-builder:main@sha256:863c748c8caaaa8909f91cbd01ff9720194567c531d1e44a16afc11b78c192f3 AS build
+FROM ghcr.io/vexxhost/openstack-venv-builder:main@sha256:22739dab49051df2d19609d60c1641c87000711d6bb91caf8f483f325154e70c AS build
 RUN \
   --mount=type=bind,from=horizon,source=/,target=/src/horizon,readwrite \
   --mount=type=bind,from=designate-dashboard,source=/,target=/src/designate-dashboard,readwrite \
@@ -24,7 +24,7 @@ uv pip install \
         pymemcache
 EOF
 
-FROM ghcr.io/vexxhost/python-base:main@sha256:ab85e44ce8c48b4b99a547b172f36790d9a184822abded588021fa079c263b47
+FROM ghcr.io/vexxhost/python-base:main@sha256:45d6ed59d5813651c67229eb5c4b3f39d2769226f204bda57e15dcce3be6d7cd
 RUN \
     groupadd -g 42424 horizon && \
     useradd -u 42424 -g 42424 -M -d /var/lib/horizon -s /usr/sbin/nologin -c "Horizon User" horizon && \
