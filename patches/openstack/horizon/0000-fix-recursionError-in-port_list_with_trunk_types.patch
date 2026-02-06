@@ -1,0 +1,38 @@
+From 998254b9b2f8613e266c9ad6bbfd002347ceace7 Mon Sep 17 00:00:00 2001
+From: okozachenko <okozachenko@vexxhost.com>
+Date: Fri, 06 Feb 2026 01:43:12 +0100
+Subject: [PATCH] fix RecursionError in port_list_with_trunk_types
+
+Change-Id: I7803b6bafac64fc6758c37ee345be47318f3c954
+Signed-off-by: okozachenko <okozachenko@vexxhost.com>
+---
+
+diff --git a/openstack_dashboard/api/neutron.py b/openstack_dashboard/api/neutron.py
+index bce0c20..7699a69 100644
+--- a/openstack_dashboard/api/neutron.py
++++ b/openstack_dashboard/api/neutron.py
+@@ -1899,7 +1899,7 @@
+             return PortTrunkSubport(port, child_ports[port['id']])
+         return Port(port)
+ 
+-    return [_get_port_info(p) for p in ports]
++    return [_get_port_info(p.to_dict()) for p in ports]
+ 
+ 
+ @profiler.trace
+diff --git a/releasenotes/notes/fix-recursionError-in-port_list_with_trunk_types-74437ded462b2f8f.yaml b/releasenotes/notes/fix-recursionError-in-port_list_with_trunk_types-74437ded462b2f8f.yaml
+new file mode 100644
+index 0000000..00aff6b
+--- /dev/null
++++ b/releasenotes/notes/fix-recursionError-in-port_list_with_trunk_types-74437ded462b2f8f.yaml
+@@ -0,0 +1,10 @@
++---
++fixes:
++  - |
++    The port_list_with_trunk_types() function was passing raw openstacksdk
++    Port objects to the Port wrapper class. When ports have
++    allowed_address_pairs, Port.__init__ calls copy.deepcopy() on the data.
++    The SDK objects contain CloudRegion references that cause infinite
++    recursion during deepcopy. Convert ports to plain dictionaries using
++    to_dict() before passing to wrapper classes, matching the pattern already
++    used in port_list().
