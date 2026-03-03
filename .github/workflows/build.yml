@@ -49,6 +49,11 @@ jobs:
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
         with:
+          repository: openstack/neutron-fwaas-dashboard
+          ref: e730567424e86a8dc8ed759631f46af8c3b05f36 # master
+
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@main
+        with:
           repository: openstack/neutron-vpnaas-dashboard
           ref: 5c5f300b52fc9add1124232330184b274b8eff8a # master
 
@@ -67,6 +72,7 @@ jobs:
             ironic-ui=openstack/ironic-ui
             magnum-ui=openstack/magnum-ui
             manila-ui=openstack/manila-ui
+            neutron-fwaas-dashboard=openstack/neutron-fwaas-dashboard
             neutron-vpnaas-dashboard=openstack/neutron-vpnaas-dashboard
             octavia-dashboard=openstack/octavia-dashboard
           push: ${{ github.event_name != 'pull_request' }}
