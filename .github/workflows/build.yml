@@ -28,42 +28,42 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/horizon
-          ref: af96b50bd0047312c9362350a8be2851c3ded51f # master
+          ref: 9bd68c179a2a657e448be965ea6998fd1b9fa9f5 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/designate-dashboard
-          ref: f235f5e601a909c49d040cd1f9e512661e56d8fd # master
+          ref: a62cf56d0920853bb12fbdda8d2d872389e1f0ae # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/heat-dashboard
-          ref: d47d1b136f3cc9619a06a00c6867abb8701d878e # master
+          ref: e316b8371d5167375613760462cdbd48e9ae4d3f # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/ironic-ui
-          ref: acb691bf705b11dbb0b3182a18d44deeff2ee3a1 # master
+          ref: fc7bbb312de5b3715dfe127b6583a8279ba70782 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/magnum-ui
-          ref: ae73f2530541fea448882f9009a1acff6d2c43ab # master
+          ref: 77f9efb535c979e713e5f0f22bff960b6019489c # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/manila-ui
-          ref: d1b4008cfaf18b8bacadf1086cd39d1f418ae792 # master
+          ref: 0ad27fff9ecafed706bd8b9c1fc814ae42847fa6 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 5c5f300b52fc9add1124232330184b274b8eff8a # master
+          ref: 68119f2eca5d772679e452d8609dbe043a738801 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/octavia-dashboard
-          ref: 674b34f2bec18c5ef2b18bdbeb7b0e1c43428328 # master
+          ref: dca394561327ecf02dc0381b4630b8943279b322 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
