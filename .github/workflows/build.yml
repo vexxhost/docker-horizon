@@ -28,22 +28,22 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/horizon
-          ref: 9bd68c179a2a657e448be965ea6998fd1b9fa9f5 # master
+          ref: 347394b18f0002f6929ebfa4f9f920e556f53118 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/designate-dashboard
-          ref: a62cf56d0920853bb12fbdda8d2d872389e1f0ae # master
+          ref: ff9856182ec86a76001f5145b64599c552aeee03 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/heat-dashboard
-          ref: e316b8371d5167375613760462cdbd48e9ae4d3f # master
+          ref: 825ef024401841c1078032111e82847582aee298 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/ironic-ui
-          ref: fc7bbb312de5b3715dfe127b6583a8279ba70782 # master
+          ref: 273780538b046eca1007bd5ea61b56ed52429a87 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
@@ -63,7 +63,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
           repository: openstack/octavia-dashboard
-          ref: dca394561327ecf02dc0381b4630b8943279b322 # master
+          ref: 3dd160a7e3c285a634140a0e92214b66555f0c4a # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@672cf56c8b828e444b6e7906d0ee355c7ec1dea9 # main
         with:
