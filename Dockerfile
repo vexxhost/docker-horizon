@@ -2,6 +2,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 FROM ghcr.io/vexxhost/openstack-venv-builder:2023.1@sha256:e057ac42f5ffdd5fb1377275cd3d1d693ea6ac8ad57bf961155e5582018a69b0 AS build
+COPY <<EOF uv.toml
+build-constraint-dependencies = ["setuptools<80"]
+EOF
 RUN \
   --mount=type=bind,from=horizon,source=/,target=/src/horizon,readwrite \
   --mount=type=bind,from=designate-dashboard,source=/,target=/src/designate-dashboard,readwrite \
