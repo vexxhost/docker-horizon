@@ -28,47 +28,47 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/horizon
-          ref: b15e396d60c9aff97c7d3ef6b44ea6fbf5256446 # master
+          ref: 7497aae5c78911f31df08bf947910c22553ab7f9 # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/designate-dashboard
-          ref: 4466de1a3bc97116940cd99df620fcd46b66a5c8 # master
+          ref: 5610dab9e2077d03967937499b34b61ef3462012 # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/heat-dashboard
-          ref: 825ef024401841c1078032111e82847582aee298 # master
+          ref: e66b5fe0e46f64528eca73b90d15bdc2e9b82d1e # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/ironic-ui
-          ref: 273780538b046eca1007bd5ea61b56ed52429a87 # master
+          ref: 16e768e11f580e4a993a294e4a27eb1d8ed1a0bd # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/magnum-ui
-          ref: 0a70f2f0a67f92977901d59b903c8f9319c9e2a7 # master
+          ref: eb667d50ee7b2894c3d687373ee1d76bcc448649 # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/manila-ui
-          ref: 27022c83b1e7f3ad6ed3f4a1e4aeb4aab8e51d52 # master
+          ref: 19e19268f90fcb3bd56c1b0bfd9cab7c05298c1c # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/neutron-fwaas-dashboard
-          ref: dac20874fff8960491d2f9268ad2dd574d5767a3 # master
+          ref: 5906f429a4550efb5a834b614956c83572d05770 # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: a26073263b7e85a862f90a5d1e33f602a8db4ef3 # master
+          ref: 1f57481b5d036813c552d6fb36f1b4ebe700f840 # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/octavia-dashboard
-          ref: 848a2bb6d3db46c7f92f307bd6cb943be94bd1f1 # master
+          ref: 0bfcd6464b79ce29de807226c06b9e712828bff2 # stable/2026.1
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
