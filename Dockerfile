@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: © 2025 VEXXHOST, Inc.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:989f81eb366ae8b705a1a4dfd6e1dc8d915d4127b456bd62f322c39aff0ec4af AS build
+FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:488901b32ecdf0b9874c61ea35eeaf3fef859701ee574b9866faad505e54a19f AS build
 COPY <<EOF uv.toml
 build-constraint-dependencies = ["setuptools<80"]
 EOF
@@ -28,7 +28,7 @@ uv pip install \
         /src/senlin-dashboard
 EOF
 
-FROM ghcr.io/vexxhost/python-base:zed@sha256:d8f4d312ca11d1d546b32144eee6dcd1535ac84c409072cdf5f1e9eaf489bd4a
+FROM ghcr.io/vexxhost/python-base:zed@sha256:69778f6c90b85935b352705d640c6f06b3a82028fc96d86c8ff9c7059176335d
 RUN \
     groupadd -g 42424 horizon && \
     useradd -u 42424 -g 42424 -M -d /var/lib/horizon -s /usr/sbin/nologin -c "Horizon User" horizon && \
