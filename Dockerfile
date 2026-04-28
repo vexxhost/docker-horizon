@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: © 2025 VEXXHOST, Inc.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:5677f1aef1fa8d920d4f8b0d790ba41a4f80e545bffdc1d20d8055d5c46d2f8e AS build
+FROM ghcr.io/vexxhost/openstack-venv-builder:zed@sha256:989f81eb366ae8b705a1a4dfd6e1dc8d915d4127b456bd62f322c39aff0ec4af AS build
 COPY <<EOF uv.toml
 build-constraint-dependencies = ["setuptools<80"]
 EOF
