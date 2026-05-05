@@ -28,7 +28,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/horizon
-          ref: 6c701e92c7b6f44dd99d07850fdfa6a71843ab06 # master
+          ref: 1013839e92af195f7024cba47e25f8f5f0546055 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
@@ -43,7 +43,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/ironic-ui
-          ref: 273780538b046eca1007bd5ea61b56ed52429a87 # master
+          ref: 01b3f8319599b1bcb13c6e5135e4cb39fe704f8a # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
