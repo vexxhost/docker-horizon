@@ -33,7 +33,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/designate-dashboard
-          ref: 70a359fd14cddbf4015453d1f663dc7f2eb7e453 # master
+          ref: 7532fe11095f4e65ddd66d1f88fa93ad91622fa3 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
@@ -53,7 +53,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/manila-ui
-          ref: 3de894077b488fbdd2586bf0799a5a2cfa35ba8b # master
+          ref: 53901991bc62dbb16913e6d01ea59c0ab622b3af # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
