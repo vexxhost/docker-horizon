@@ -58,12 +58,12 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/neutron-fwaas-dashboard
-          ref: a57316b31f53c407d542aacc3692f56d5d9e5d7b # master
+          ref: 70eb7519ccf8d7e1c31d1a7f03f3c29a8658ac67 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: be2f69cae083cc91f46531d13f62b44dfe0be4fe # master
+          ref: 81d59c768e88f5bcc1e38b7a71e2c38dfd9c3a3c # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
