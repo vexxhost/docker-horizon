@@ -24,7 +24,7 @@ uv pip install \
         pymemcache
 EOF
 
-FROM ghcr.io/vexxhost/python-base:2024.2@sha256:6628282f898a0a9a09e85c17af10f5441afc0031e6b039bf43a91b09609d170b
+FROM ghcr.io/vexxhost/python-base:2024.2@sha256:21e437d442edf4fe464f6cca7f7e484858afb0173f7880320fda8fa034d43ecb
 RUN \
     groupadd -g 42424 horizon && \
     useradd -u 42424 -g 42424 -M -d /var/lib/horizon -s /usr/sbin/nologin -c "Horizon User" horizon && \
