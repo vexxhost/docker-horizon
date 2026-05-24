@@ -38,7 +38,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
           repository: openstack/heat-dashboard
-          ref: aa4e7a96ccc65ad803263c8f7cd8e8a28c89d8ed # master
+          ref: e6fdf108e57a3dde9ef6671d540c7a9e763bd6e1 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@a1ad25c00b6bbf44621748b3a9ed664c6b6cf929 # main
         with:
