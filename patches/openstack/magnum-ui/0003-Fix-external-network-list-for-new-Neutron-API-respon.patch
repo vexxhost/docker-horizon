@@ -1,0 +1,85 @@
+From 2e14053945143594db7956856f6ef9d78cd427d1 Mon Sep 17 00:00:00 2001
+From: emogirl00272 <emogirl00272@gmail.com>
+Date: Fri, 15 Aug 2025 01:59:43 +0300
+Subject: [PATCH] Fix external network list for new Neutron API response
+
+The network list in the Cluster Template workflow was always empty
+because the code only checked `router:external` field and assumed
+`subnets` contained full objects. In newer Neutron / openstacksdk
+responses, the field is called `is_router_external` and subnets
+may be provided as `subnet_ids` instead of full objects.
+
+This patch updates onGetNetworks() to:
+- Accept both `router:external` and `is_router_external`.
+- Handle both `subnets` (objects) and `subnet_ids` (IDs).
+- Work with either `response.data.items` or `response.data.networks`.
+
+Closes-Bug: #2106094
+Change-Id: If36ea24d4ba5f235dac9e95c2231efb21c2dea63
+Signed-off-by: emogirl00272 <emogirl00272@gmail.com>
+---
+ .../workflow/workflow.service.js              | 43 ++++++++++++++++---
+ 1 file changed, 37 insertions(+), 6 deletions(-)
+
+diff --git a/magnum_ui/static/dashboard/container-infra/cluster-templates/workflow/workflow.service.js b/magnum_ui/static/dashboard/container-infra/cluster-templates/workflow/workflow.service.js
+index 86c053a..08b55c1 100644
+--- a/magnum_ui/static/dashboard/container-infra/cluster-templates/workflow/workflow.service.js
++++ b/magnum_ui/static/dashboard/container-infra/cluster-templates/workflow/workflow.service.js
+@@ -561,17 +561,48 @@
+     }
+ 
+     function onGetNetworks(response) {
+-      externalNetworks = [{value:"", name: gettext("Choose a External Network")}];
+-      fixedNetworks = [{value:"", name: gettext("Choose a Private Network")}];
+-      angular.forEach(response.data.items, function(item) {
+-        if (item["router:external"]) {
+-          externalNetworks.push({value: item.id, name: item.name});
++      var items = response && response.data &&
++        (response.data.items || response.data.networks) || [];
++
++      externalNetworks = [{ value: '', name: gettext('Choose a External Network') }];
++      fixedNetworks = [{ value: '', name: gettext('Choose a Private Network') }];
++
++      function isExternal(net) {
++        return net['router:external'] === true || net.is_router_external === true;
++      }
++
++      function normalizeSubnets(net) {
++        var out = [];
++        if (angular.isArray(net.subnets) && net.subnets.length) {
++          angular.forEach(net.subnets, function (s) {
++            var id = s.id || s;
++            var name = s.name || id;
++            out.push({ id: id, name: name });
++          });
++        } else if (angular.isArray(net.subnet_ids) && net.subnet_ids.length) {
++          angular.forEach(net.subnet_ids, function (id) {
++            out.push({ id: id, name: id });
++          });
++        }
++        return out;
++      }
++
++      angular.forEach(items, function (net) {
++        var label = net.name || net.id;
++        if (isExternal(net)) {
++          externalNetworks.push({ value: net.id, name: label });
+         } else {
+-          fixedNetworks.push({value: item.id, name: item.name, subnets: item.subnets});
++          fixedNetworks.push({
++            value: net.id,
++            name: label,
++            subnets: normalizeSubnets(net)
++          });
+         }
+       });
++
+       form[0].tabs[2].items[0].items[0].items[4].titleMap = externalNetworks;
+       form[0].tabs[2].items[0].items[0].items[5].titleMap = fixedNetworks;
++
+       var deferred = $q.defer();
+       deferred.resolve({
+         externalNetworks: externalNetworks,
+-- 
+2.50.1 (Apple Git-155)
+
