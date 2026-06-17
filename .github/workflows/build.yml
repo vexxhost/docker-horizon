@@ -33,7 +33,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@e012e9b7df8e22166070c4389caf52285807598a # main
         with:
           repository: openstack/designate-dashboard
-          ref: 7532fe11095f4e65ddd66d1f88fa93ad91622fa3 # master
+          ref: 57a8c070d642a64c88177a22aec06d77912a2b47 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@e012e9b7df8e22166070c4389caf52285807598a # main
         with:
