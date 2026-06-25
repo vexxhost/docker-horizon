@@ -12,6 +12,35 @@ permissions:
   contents: read
 
 jobs:
+  tox:
+    name: tox (${{ matrix.project.repository }})
+    uses: vexxhost/docker-atmosphere/.github/workflows/tox.yml@0dcf370eb08b3f884992181348b8c41d7f66c10e # main
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - repository: openstack/horizon
+            ref: 07dc93541555adf934b33fd090e46e36d968ba9e # master
+          - repository: openstack/designate-dashboard
+            ref: 57a8c070d642a64c88177a22aec06d77912a2b47 # master
+          - repository: openstack/heat-dashboard
+            ref: e6fdf108e57a3dde9ef6671d540c7a9e763bd6e1 # master
+          - repository: openstack/ironic-ui
+            ref: ffbbce4147cb63d0588375970a73b4c7259b8f34 # master
+          - repository: openstack/magnum-ui
+            ref: dc1bbe9929a4d89eff8fa9e3d875def3712e323c # master
+          - repository: openstack/manila-ui
+            ref: 6bfccb5672570a4e1b51dd354c42c8b88235de45 # master
+          - repository: openstack/neutron-fwaas-dashboard
+            ref: 9c953095a783c685ac49f11272a9a18dbe1deebf # master
+          - repository: openstack/neutron-vpnaas-dashboard
+            ref: ebb88b8df0e66022c02f923842a67eb2767df8a0 # master
+          - repository: openstack/octavia-dashboard
+            ref: cffc5acf3a5606713b6e50a92f838ae75bd2f824 # master
+    with:
+      repository: ${{ matrix.project.repository }}
+      ref: ${{ matrix.project.ref }}
+
   image:
     runs-on: ubuntu-latest
     permissions:
