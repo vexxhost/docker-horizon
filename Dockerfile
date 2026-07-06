@@ -11,6 +11,8 @@ RUN \
   --mount=type=bind,from=manila-ui,source=/,target=/src/manila-ui,readwrite \
   --mount=type=bind,from=neutron-vpnaas-dashboard,source=/,target=/src/neutron-vpnaas-dashboard,readwrite \
   --mount=type=bind,from=octavia-dashboard,source=/,target=/src/octavia-dashboard,readwrite <<EOF bash -xe
+sed -i 's/^os-service-types===.*/os-service-types===1.8.2/' /upper-constraints.txt
+sed -i 's/^openstacksdk===.*/openstacksdk===4.10.0/' /upper-constraints.txt
 uv pip install \
     --constraint /upper-constraints.txt \
         /src/designate-dashboard \
