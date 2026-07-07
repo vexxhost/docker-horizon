@@ -9,6 +9,7 @@ RUN \
   --mount=type=bind,from=ironic-ui,source=/,target=/src/ironic-ui,readwrite \
   --mount=type=bind,from=magnum-ui,source=/,target=/src/magnum-ui,readwrite \
   --mount=type=bind,from=manila-ui,source=/,target=/src/manila-ui,readwrite \
+  --mount=type=bind,from=neutron-fwaas-dashboard,source=/,target=/src/neutron-fwaas-dashboard,readwrite \
   --mount=type=bind,from=neutron-vpnaas-dashboard,source=/,target=/src/neutron-vpnaas-dashboard,readwrite \
   --mount=type=bind,from=octavia-dashboard,source=/,target=/src/octavia-dashboard,readwrite <<EOF bash -xe
 sed -i "s/^os-service-types===.*python_version>='3.10'.*/os-service-types===1.8.2;python_version>='3.10'/" /upper-constraints.txt
@@ -21,6 +22,7 @@ uv pip install \
         /src/ironic-ui \
         /src/magnum-ui \
         /src/manila-ui \
+        /src/neutron-fwaas-dashboard \
         /src/neutron-vpnaas-dashboard \
         /src/octavia-dashboard \
         pymemcache
