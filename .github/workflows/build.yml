@@ -53,7 +53,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@e22141dfd5b75c4109fab95427441cfa762bc770 # main
         with:
           repository: openstack/manila-ui
-          ref: 7d25f0ad941c6f522fa7c896d2a8dce97f61a370 # master
+          ref: c1f5b0496b9f32e6431fe4ea96af70b8f7b52ab4 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@e22141dfd5b75c4109fab95427441cfa762bc770 # main
         with:
