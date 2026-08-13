@@ -63,7 +63,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@70f8dfc6d54fdcfc58940cd93cecced306374ed7 # main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: a6c9ac148a073306d59af62c793d2e40d55dae1d # master
+          ref: dae6a7ac1608a1d1e05b0dccf166d8534211ac4f # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@70f8dfc6d54fdcfc58940cd93cecced306374ed7 # main
         with:
