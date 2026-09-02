@@ -68,7 +68,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
         with:
           repository: openstack/octavia-dashboard
-          ref: 9ed967f597476426773c98f118e5a5025396aaed # master
+          ref: 0dd4416a79548846c2a541df6accd90a3c7814fc # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/build-image@b6113e0668dc85929f783667f0347fc76b272844 # main
         with:
