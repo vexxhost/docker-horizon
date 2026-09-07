@@ -25,52 +25,52 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/horizon
           ref: df18361ca0c306b7c3befb5153e4d5a7c161f9c2 # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/designate-dashboard
           ref: 98a0a76eac11e94e2d6202f417ca8a616f259bac # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/heat-dashboard
           ref: c39223187e4215d309bf03aa36708242bda5d0da # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/ironic-ui
           ref: bce74adf2fd0969821fe21f3b31cfffe5214b59f # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/magnum-ui
           ref: 0a246f24a262429b87242e34d5446419c9022561 # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/manila-ui
           ref: c1f5b0496b9f32e6431fe4ea96af70b8f7b52ab4 # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/neutron-fwaas-dashboard
           ref: 87e941455ccb5e2b7c47f33e34ed2f4063c4987f # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/neutron-vpnaas-dashboard
           ref: dae6a7ac1608a1d1e05b0dccf166d8534211ac4f # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/checkout@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           repository: openstack/octavia-dashboard
           ref: 66091d1dfa5ec44be2d49ea25477866d87b92088 # master
 
-      - uses: vexxhost/docker-atmosphere/.github/actions/build-image@b6113e0668dc85929f783667f0347fc76b272844 # main
+      - uses: vexxhost/docker-atmosphere/.github/actions/build-image@9b90ea63bb319c20f3d3e3d9688c36180580d1f2 # main
         with:
           image-name: horizon
           build-contexts: |
