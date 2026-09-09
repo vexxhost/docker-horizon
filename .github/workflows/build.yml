@@ -28,12 +28,12 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@d048c9245c93c10c06d42d1ea9311fcd3d416530 # main
         with:
           repository: openstack/horizon
-          ref: 93904adfdeba39dba8d2d8f9c2f2ec486ad22b22 # master
+          ref: 0ce35ba73f16e330f5d6b1e7f65ff8c314eba7ca # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@d048c9245c93c10c06d42d1ea9311fcd3d416530 # main
         with:
           repository: openstack/designate-dashboard
-          ref: 98a0a76eac11e94e2d6202f417ca8a616f259bac # master
+          ref: 196a1281fed1d8e737f41667b1fbdf30f8754a27 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@d048c9245c93c10c06d42d1ea9311fcd3d416530 # main
         with:
