@@ -43,7 +43,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@d048c9245c93c10c06d42d1ea9311fcd3d416530 # main
         with:
           repository: openstack/ironic-ui
-          ref: 457ae742139812034574bca45581ecb6bf4749bc # master
+          ref: b3ff1ee399b5abbfa52d020fe7e45d17272f7979 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@d048c9245c93c10c06d42d1ea9311fcd3d416530 # main
         with:
