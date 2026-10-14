@@ -28,7 +28,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@15f30aa3f1fff75915cf230d19e00a54324d6ec7 # main
         with:
           repository: openstack/horizon
-          ref: 01a68f4f06ddde205618700672b6cffd00f8e404 # master
+          ref: 891ae193d101d629e8bf0e7ea47a636e3217b825 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@15f30aa3f1fff75915cf230d19e00a54324d6ec7 # main
         with:
