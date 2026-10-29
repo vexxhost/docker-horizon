@@ -1,0 +1,30 @@
+From 263dcf5189a6f9934e98a2e6ab251f70e1adcc89 Mon Sep 17 00:00:00 2001
+From: Pavlo Shchelokovskyy <shchelokovskyy@gmail.com>
+Date: Thu, 02 Apr 2026 20:09:23 +0300
+Subject: [PATCH] Fix port list with trunks
+
+when porting to openstacksdk, this place was omitted.
+As a result, the port objects returned by /api/neutron/ports
+in presense of trunk Neutron extension will be missing those
+custom horizon-specific fields (like 'admin_state'), breaking UI.
+
+In particular, it is currently impossible to see any ports
+in instance launch wizzard when trunks extension is enabled.
+
+Change-Id: I4673fbb49f2924e90684ff44f690822d2902d5d8
+Signed-off-by: Pavlo Shchelokovskyy <shchelokovskyy@gmail.com>
+---
+
+diff --git a/openstack_dashboard/api/neutron.py b/openstack_dashboard/api/neutron.py
+index 423f3ac..e3f15c6 100644
+--- a/openstack_dashboard/api/neutron.py
++++ b/openstack_dashboard/api/neutron.py
+@@ -1905,7 +1905,7 @@
+             return PortTrunkSubport(port, child_ports[port['id']])
+         return Port(port)
+ 
+-    return [_get_port_info(p) for p in ports]
++    return [_get_port_info(p.to_dict()) for p in ports]
+ 
+ 
+ @profiler.trace
