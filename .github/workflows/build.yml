@@ -43,7 +43,7 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@c2a2333f668bfbf131bd2a7aa8c387be80f0ea85 # main
         with:
           repository: openstack/ironic-ui
-          ref: 4d28840cb0669df591c332094f15c6d4782ba10d # master
+          ref: 8ccc929f43ace7d472760bdb263775b118a3c626 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@c2a2333f668bfbf131bd2a7aa8c387be80f0ea85 # main
         with:
@@ -58,12 +58,12 @@ jobs:
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@c2a2333f668bfbf131bd2a7aa8c387be80f0ea85 # main
         with:
           repository: openstack/neutron-fwaas-dashboard
-          ref: 738e31c0b43625d6ada04e8a84c834fd53cb3f63 # master
+          ref: 1ef606fc6053aeedc8b7ee187c8acffb4e3d964f # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@c2a2333f668bfbf131bd2a7aa8c387be80f0ea85 # main
         with:
           repository: openstack/neutron-vpnaas-dashboard
-          ref: 6dc8bf4d2c201bec7c2d8af46c83c13f09a97a7e # master
+          ref: 87f7ee6f3b165e76de13a711a048aa61a00cd8e4 # master
 
       - uses: vexxhost/docker-atmosphere/.github/actions/checkout@c2a2333f668bfbf131bd2a7aa8c387be80f0ea85 # main
         with:
