@@ -1,0 +1,241 @@
+From 7a441d32ef51a707eab2396bb9aa0591f4ec6cfb Mon Sep 17 00:00:00 2001
+From: Rico Lin <rlin@vexxhost.com>
+Date: Tue, 30 Jun 2026 15:14:45 +0800
+Subject: [PATCH] Avoid floating IP label for BM clusters without API LB
+
+For bare metal cluster templates, do not send the
+master_lb_floating_ip_enabled label when the Kubernetes API load balancer is
+not enabled. Bare metal mCAPI clusters need the control plane endpoint from
+the server address in this mode, and sending the false label makes the driver
+try to disable a managed floating IP instead.
+
+Keep the existing behavior for non-bare-metal clusters and for bare metal
+clusters that do enable the API load balancer.
+
+Change-Id: I024bce6a3d83ada73e3812b9d52c27b157cdd28e
+Signed-off-by: Rico Lin <rlin@vexxhost.com>
+Assisted-By: Codex <noreply@openai.com>
+---
+ .../clusters/create/create.service.js         |  4 +
+ .../clusters/create/create.service.spec.js    | 78 +++++++++++++++----
+ .../workflow/cluster-template.controller.js   |  9 ++-
+ .../cluster-template.controller.spec.js       | 15 ++++
+ .../clusters/workflow/workflow.service.js     |  1 +
+ 5 files changed, 92 insertions(+), 15 deletions(-)
+
+diff --git a/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.js b/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.js
+index c30fa7a..c6bf6b5 100644
+--- a/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.js
++++ b/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.js
+@@ -168,6 +168,10 @@
+         }
+       }
+ 
++      if (model.server_type === 'bm' && !model.master_lb_enabled) {
++        delete requestLabels.master_lb_floating_ip_enabled;
++      }
++
+       // Only add to the request Object if set (= not default)
+       function addFieldToRequestObjectIfSet(requestFieldName, modelFieldName) {
+         if (model[modelFieldName] !== MODEL_DEFAULTS[modelFieldName]) {
+diff --git a/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.spec.js b/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.spec.js
+index 20a0276..5ddc4eb 100644
+--- a/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.spec.js
++++ b/magnum_ui/static/dashboard/container-infra/clusters/create/create.service.spec.js
+@@ -20,20 +20,26 @@
+   describe('horizon.dashboard.container-infra.clusters.create.service', function() {
+ 
+     var service, $scope, $q, deferred, magnum, workflow, spinnerModal, modalConfig, configDeferred,
+-      $httpBackend;
+-
+-    var model = {
+-      id: 1,
+-      labels: 'key1=value1,key2=value2',
+-      auto_scaling_enabled: true,
+-      templateLabels: {key1:'default value'},
+-      override_labels: true,
+-      master_count: 1,
+-      create_network: true,
+-      addons: [{labels:{}},{labels:{}}],
+-      ingress_controller: {labels:{ingress_controller:''}},
+-      DEFAULTS: {labels:''}
+-    };
++      $httpBackend, model;
++
++    function getModel() {
++      return {
++        id: 1,
++        labels: 'key1=value1,key2=value2',
++        auto_scaling_enabled: true,
++        templateLabels: {key1:'default value'},
++        override_labels: true,
++        master_count: 1,
++        master_lb_enabled: false,
++        master_lb_floating_ip_enabled: false,
++        api_master_lb_allowed_cidrs: '',
++        create_network: true,
++        server_type: 'vm',
++        addons: [{labels:{}},{labels:{}}],
++        ingress_controller: {labels:{ingress_controller:''}},
++        DEFAULTS: {labels:''}
++      };
++    }
+     var modal = {
+       open: function(config) {
+         deferred = $q.defer();
+@@ -61,6 +67,7 @@
+       service = $injector.get('horizon.dashboard.container-infra.clusters.create.service');
+       magnum = $injector.get('horizon.app.core.openstack-service-api.magnum');
+       workflow = $injector.get('horizon.dashboard.container-infra.clusters.workflow');
++      model = getModel();
+ 
+       spinnerModal = $injector.get('horizon.framework.widgets.modal-wait-spinner.service');
+       spyOn(spinnerModal, 'showModalSpinner').and.callFake(function() {});
+@@ -82,6 +89,16 @@
+       spyOn(modal, 'open').and.callThrough();
+     }));
+ 
++    function submitModel($timeout) {
++      service.perform(null, $scope);
++
++      $httpBackend.expectGET('/static/dashboard/container-infra/clusters/panel.html').respond({});
++      $timeout.flush();
++      $scope.$apply();
++
++      return magnum.createCluster.calls.mostRecent().args[0];
++    }
++
+     it('should check the policy if the user is allowed to create cluster', function() {
+       var allowed = service.allowed();
+       expect(allowed).toBeTruthy();
+@@ -120,5 +137,38 @@
+       $timeout.flush();
+       $scope.$apply();
+     }));
++
++    it('should omit master lb floating ip label for bm cluster without ' +
++      'master lb enabled', inject(function($timeout) {
++        model.server_type = 'bm';
++        model.master_lb_enabled = false;
++        model.master_lb_floating_ip_enabled = false;
++
++        var request = submitModel($timeout);
++
++        expect(request.labels.master_lb_floating_ip_enabled).toBeUndefined();
++      }));
++
++    it('should remove template master lb floating ip label for bm cluster ' +
++      'without master lb enabled', inject(function($timeout) {
++        model.server_type = 'bm';
++        model.master_lb_enabled = false;
++        model.templateLabels.master_lb_floating_ip_enabled = 'false';
++
++        var request = submitModel($timeout);
++
++        expect(request.labels.master_lb_floating_ip_enabled).toBeUndefined();
++      }));
++
++    it('should send master lb floating ip label for non-bm cluster without ' +
++      'master lb enabled', inject(function($timeout) {
++        model.server_type = 'vm';
++        model.master_lb_enabled = false;
++        model.master_lb_floating_ip_enabled = false;
++
++        var request = submitModel($timeout);
++
++        expect(request.labels.master_lb_floating_ip_enabled).toBe(false);
++      }));
+   });
+ })();
+diff --git a/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.js b/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.js
+index ada0ac5..616f817 100644
+--- a/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.js
++++ b/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.js
+@@ -86,6 +86,7 @@
+       setResponseAsDefaultIfUnset('node_count', 'node_count');
+       setResponseAsDefaultIfUnset('flavor_id', 'flavor_id');
+       setResponseAsDefaultIfUnset('master_lb_enabled', 'master_lb_enabled');
++      setResponseAsCurrentTemplateValue('server_type', 'server_type');
+ 
+       if (!template.labels) { return; }
+ 
+@@ -115,10 +116,16 @@
+ 
+       function setResponseAsDefaultIfUnset(responseKey, modelKey) {
+         if ($scope.model[modelKey] === MODEL_DEFAULTS[modelKey] &&
+-          template[responseKey] !== null) {
++          angular.isDefined(template[responseKey]) && template[responseKey] !== null) {
+           $scope.model[modelKey] = template[responseKey];
+         }
+       }
++      function setResponseAsCurrentTemplateValue(responseKey, modelKey) {
++        $scope.model[modelKey] = angular.isDefined(template[responseKey]) &&
++          template[responseKey] !== null
++          ? template[responseKey]
++          : MODEL_DEFAULTS[modelKey];
++      }
+       function setLabelResponseAsDefault(labelKey, modelKey, isValueBoolean) {
+         if (template.labels[labelKey] !== null) {
+           $scope.model[modelKey] = isValueBoolean
+diff --git a/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.spec.js b/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.spec.js
+index 3a5e987..364f484 100644
+--- a/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.spec.js
++++ b/magnum_ui/static/dashboard/container-infra/clusters/workflow/cluster-template.controller.spec.js
+@@ -22,6 +22,7 @@
+         // Props used by the form
+         name: '',
+         cluster_template_id: '',
++        server_type: '',
+         availability_zone: '',
+         keypair: '',
+         addons: [],
+@@ -140,6 +141,7 @@
+       templateResponse.master_flavor_id = 'ABC';
+       templateResponse.node_count = 1;
+       templateResponse.flavor_id = 'ABC';
++      templateResponse.server_type = 'bm';
+ 
+       var model = $scope.model;
+       model.cluster_template_id = '99'; // Triggers business logic revalidation
+@@ -150,6 +152,7 @@
+       expect(model.master_flavor_id).toEqual('ABC');
+       expect(model.node_count).toBe(1);
+       expect(model.flavor_id).toEqual('ABC');
++      expect(model.server_type).toEqual('bm');
+     });
+ 
+     it('should not override some non-default model properties by values ' +
+@@ -178,6 +181,18 @@
+       expect(model.flavor_id).toEqual('XYZ');
+     });
+ 
++    it('should update server_type when the selected cluster template ' +
++      'changes', function() {
++      var model = $scope.model;
++
++      model.server_type = 'vm';
++      templateResponse.server_type = 'bm';
++      model.cluster_template_id = '99'; // Triggers business logic revalidation
++      $scope.$apply();
++
++      expect(model.server_type).toEqual('bm');
++    });
++
+     it('should set number of Master Nodes to 1 if the cluster template ' +
+       'response contains negative `master_lb_enabled` flag', function() {
+       $scope.model.master_count = 99;
+diff --git a/magnum_ui/static/dashboard/container-infra/clusters/workflow/workflow.service.js b/magnum_ui/static/dashboard/container-infra/clusters/workflow/workflow.service.js
+index 6754cdc..067f238 100644
+--- a/magnum_ui/static/dashboard/container-infra/clusters/workflow/workflow.service.js
++++ b/magnum_ui/static/dashboard/container-infra/clusters/workflow/workflow.service.js
+@@ -561,6 +561,7 @@
+           // Props used by the form
+           name: '',
+           cluster_template_id: '',
++          server_type: '',
+           availability_zone: '',
+           keypair: '',
+           addons: [],
+-- 
+2.25.1
+
