@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: © 2025 VEXXHOST, Inc.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-FROM ghcr.io/vexxhost/openstack-venv-builder:2023.1@sha256:28a81b1df0a230b6713bc49ab6f767ceb5b8a93d35c190697a31d2579e7fd73d AS build
+FROM ghcr.io/vexxhost/openstack-venv-builder:2023.1@sha256:ba3d77e7c82f6d761ad4bbe756a31cd384adf49cae66bb094f313574d62eb1ad AS build
 COPY <<EOF uv.toml
 build-constraint-dependencies = ["setuptools<80"]
 EOF
@@ -28,7 +28,7 @@ uv pip install \
         setuptools
 EOF
 
-FROM ghcr.io/vexxhost/python-base:2023.1@sha256:c6c2e44b020443c149f7f9831a7f1467f19df4d97e0dbf67112e197eb4c11be5
+FROM ghcr.io/vexxhost/python-base:2023.1@sha256:3e6ee9d16016a3ae4dc11883220adfe5cd4563e20d8c9d809801cca50e79e4f3
 RUN \
     groupadd -g 42424 horizon && \
     useradd -u 42424 -g 42424 -M -d /var/lib/horizon -s /usr/sbin/nologin -c "Horizon User" horizon && \
